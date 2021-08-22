@@ -1,0 +1,54 @@
+<div class="row mt-4">
+  <div class="col-md-6">
+    <div class="row" style="height:450px;">
+      <div class="col-md-12 my-auto side-header">
+        <img src="/assets/img/user.png" class="mx-auto d-block">
+        <h1>Register</h1>
+        <p><em><strong>-Asp.Net Core Wep API</strong> <strong> Angular 11</strong> </em></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <form [formGroup]="userService.formModel" autocomplete="off" (submit)="onSubmit()">
+      <div class="form-group required">
+        <label>User Name</label>
+        <input class="form-control" formControlName="UserName">
+        <label class="text-danger" *ngIf="userService.formModel.get('UserName').touched && userService.formModel.get('UserName').errors?.required">This is a mandotary</label>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input class="form-control" formControlName="Email">
+        <label class="text-danger" *ngIf="userService.formModel.get('Email').touched && userService.formModel.get('Email').errors?.email">İnvalid email address</label>
+
+      </div>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input class="form-control" formControlName="FullName">
+      </div>
+      <div formGroupName="Passwords">
+        <div class="form-group required">
+          <label>Password</label>
+          <input type="password" class="form-control" formControlName="Password">
+          <label class="text-danger"
+            *ngIf="userService.formModel.get('Passwords.Password').touched && userService.formModel.get('Passwords.Password').errors?.required">This
+            is a mandotary</label>
+          <label class="text-danger" *ngIf="userService.formModel.get('Passwords.Password').touched && userService.formModel.get('Passwords.Password').errors?.minlegth">Min 4 cha.</label>
+        </div>
+        <div class="form-group required">
+          <label>Confirm Password</label>
+          <input type="password" class="form-control" formControlName="ConfirmPassword">
+          <label class="text-danger"
+            *ngIf="userService.formModel.get('Passwords.ConfirmPassword').touched && userService.formModel.get('Passwords.ConfirmPassword').errors?.required">This
+            is a mandotary</label>
+            <label class="text-danger"
+            *ngIf="userService.formModel.get('Passwords.ConfirmPassword').touched && userService.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch">Confim password does not match with password</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-8 ofset-md-2">
+          <button type="submit" class="btn btn-lg btn-block" [disabled]="!userService.formModel.valid">Sign Up</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
