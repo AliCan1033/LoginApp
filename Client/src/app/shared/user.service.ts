@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient, HttpClientModule} from "@angular/common/http"
+import { HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http"
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
 
   readonly apiUrl = 'https://localhost:5001/api';
+
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
 
@@ -42,5 +44,9 @@ export class UserService {
       Password: this.formModel.value.Passwords.Password
     };
     return this.http.post(this.apiUrl + '/User/Register', body);
+  }
+
+  login(formData){
+    return this.http.post(this.apiUrl + '/User/Login', formData);
   }
 }
