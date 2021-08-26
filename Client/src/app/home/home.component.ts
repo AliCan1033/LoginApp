@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../shared/user.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   userDetails;
 
-  constructor(private router:Router, private userSevice:UserService) { }
+  constructor(private router:Router, private userSevice:UserService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.userSevice.getUserProfile().subscribe(
@@ -27,5 +28,7 @@ export class HomeComponent implements OnInit {
   onLogout(){
     localStorage.removeItem('token');
     this.router.navigate(['/user/login']);
+    this.toastr.success('Your logout is ok','By :)')
+
   }
 }

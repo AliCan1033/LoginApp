@@ -32,5 +32,30 @@ namespace Api.Controllers
 
             };
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        [Route("ForAdmin")]
+        public string GetForAdmin()
+        {
+            return "Web method for admin";
+        }
+        
+        [HttpGet]
+        [Authorize(Roles = "Customer")]
+        [Route("ForCustomer")]
+        public string GetForCustomer()
+        {
+            return "Web method for customer";
+        }
+
+        
+        [HttpGet]
+        [Authorize(Roles = "Admin,Customer")]
+        [Route("ForAdminOrCustomer")]
+        public string GetForAdminOrCustomer()
+        {
+            return "Web method for admin or Customer";
+        }
     }
 }

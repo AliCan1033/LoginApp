@@ -48,7 +48,11 @@ namespace Api
             {
                 options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"));
             });
-            services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<AuthenticationContext>();
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<AuthenticationContext>();
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;
